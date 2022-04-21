@@ -236,8 +236,6 @@ function time2str(time){
 
 app.get('/upsertDB',
   async (req,res,next) => {
-    //await Course.deleteMany({})
-    console.log("123")
     for (course of courses){
       const {subject,coursenum,section,term,times}=course;
       const num = getNum(coursenum);
