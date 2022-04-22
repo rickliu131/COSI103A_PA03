@@ -314,6 +314,21 @@ app.post('/courses/byKeyword',
   }
 )
 
+app.post('/courses/byDay',
+  // show courses by day
+  async (req,res,next) => {
+    const day = req.body.day;
+    const courses =
+       await Course
+               .find({times: {'$elemMatch':{'days':day, }},independent_study:false})
+               .sort({term:1,num:1,sectiomn:1})
+    //res.json(courses)
+    res.locals.courses = courses
+    res.locals.times2str = times2str
+    res.render('courselist')
+  }
+)
+
 app.use(isLoggedIn)
 
 app.get('/addCourse/:courseId',
